@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/adquirencia_new.css">
+    <title>CHECKER PPI - Adquirencia</title>
+</head>
+<body>
+    <?php require 'views/header.phtml'; ?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <div id="charts">
+                <ul>
+                    <li>
+                        <div name="opcion" class="opcion">
+                            <div class="button-menu">
+                                <button class="icono" id="701" value="701" >701</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div name="opcion" class="opcion">
+                            <div class="button-menu">
+                                <button class="icono" id="703" value="703">703</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div name="opcion" class="opcion">
+                            <div class="button-menu">
+                                <button class="icono" id="720" value="720">720</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div name="opcion" class="opcion">
+                            <div class="button-menu">
+                                <button class="icono" id="730" value="730">730</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div name="opcion" class="opcion">
+                            <div class="button-menu">
+                                <button class="icono" id="734" value="734">734</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div name="opcion" class="opcion">
+                            <div class="button-menu">
+                                <button class="icono" id="790" value="790">790</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <h1 id="encabezado">Adquirencia</h1>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        const adquirencias = <?php echo json_encode($this->adq_fecha); ?>;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="<?php echo constant('URL'); ?>js/adquirencia_new.js "></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'botonera.css';
+@import 'tabla.css';
+
+#main #botonera #filtros #datepicker{
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    color: #000;
+    background: rgb(48, 201, 193);
+    font-family: 'Days One', sans-serif;
+    font-size: 13px;
+}
+
+#main #contenido #table thead {
+    z-index:1000;
+    position: sticky;
+    top: 0;
+}
+
+#main #contenido #table tbody{
+    border-top: 26px solid rgba(167, 157, 157, 0.85);
+    background: transparent;
+    font-size: 15px;
+}

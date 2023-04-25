@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/incidentes.css">
+    <title>CHECKER PPI - Incidentes</title>
+</head>
+<body>
+    <?php require 'views/header.phtml';?>
+    <div id="main">
+        <form id="formulario">
+            <div id="botonera_incidentes">
+                <div class="filtro_incidentes">
+                    <input type="text" name="tags" id="tags" value="<?php echo isset($_COOKIE['tags']) ? $_COOKIE['tags'] : '';?>">
+                </div><!--
+                --><div class="btn_buscar" id="btn_buscar">
+                    <i class="fas fa-search"></i>
+                </div><!--
+                --><div class="btn_incidentes" id="btn_agregar">
+                    <p>Agregar incidente <i class="fas fa-plus-circle"></i></p>
+                </div>
+            </div>
+            <div id="contenido">
+                <div class="scroll">     
+                    <table id="table" frame="void" rules="rows">
+                        <thead class="center">
+                            <th class="td_tarea">BANCO</th>
+                            <th class="td_usuario">USUARIO</th>
+                            <th class="td_incidente">NÚMERO INCIDENTE</th>
+                            <th class="td_fecha">FECHA</th>
+                            <th class="td_tema">TEMA</th> 
+                        </thead> 
+                        <tbody id="tbody">
+                            <?php foreach($this->incidentes as $incidente) { ?>
+                                <tr>
+                                    <td class="center td_tarea">
+                                        <?php echo $incidente['banco']; ?> 
+                                    </td>
+                                    <td class="center td_hora"> 
+                                        <?php echo $incidente['usuario']; ?>
+                                    </td>
+                                    <td class="center td_asignado">
+                                        <?php echo $incidente['numero_incidente']; ?>
+                                    </td>
+                                    <td class="center td_fecha">
+                                        <?php 
+                                            $aux = explode('-', $incidente['fecha']);
+                                            echo "$aux[2]-$aux[1]-$aux[0]";
+                                        ?>
+                                    </td>
+                                    <td class="center td_fecha">
+                                        <?php echo $incidente['tema']; ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form> 
+    </div>
+
+    <div id="new_incidente" class="oculto">
+        <div id="clickeable_salir">
+            
+        </div>                                
+        <div id="contenedor_incidente" class="contenedor">
+            <form>
+                <div class="input">
+                    <label for="banco">Banco</label>
+                    <select name="banco" id="banco">
+                        <option value="null">Seleccione un banco... </option>
+                        <?php foreach($this->bancos as $banco) { ?>
+                            <option value="<?php echo $banco['codigo']; ?>">
+                                <?php echo $banco['codigo'] . ' - ' . $banco['nombre']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                    <div id="error_banco" class="error oculto">
+                        <p>Debe seleccionar un banco de la lista</p>
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="numero">Número de incidente</label>
+                    <input type="text" name="numero" id="numero">
+                    <div id="error_numero" class="error oculto">
+                        <p>El número debe tener el formato 'AAA999999999999'</p>
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" name="fecha" id="fecha">
+                    <div id="error_fecha" class="error oculto">
+                        <p>Debe ingresar la fecha del incidente</p>
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="tema">Tema</label>
+                    <input type="text" name="tema" id="tema">
+                    <div id="error_tema" class="error oculto">
+                        <p>El tema debe contener al menos 10 caracteres</p>
+                    </div>
+                </div>
+                <div class="input">
+                    <label for="tags">Tags</label>
+                    <input type="textarea" name="new_tags" id="new_tags">
+                    <div id="error_tags" class="error oculto">
+                        <p>Debe ingresar al menos 1 tag y debe tener más de 3 dígitos</p>
+                    </div>
+                </div>
+                <div class="input">
+                    <div id="btn_cargar" class="btn_cargar">
+                        <p>Cargar incidente</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="<?php echo constant('URL'); ?>js/incidentes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html> 

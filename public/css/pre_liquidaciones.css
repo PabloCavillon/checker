@@ -1,0 +1,43 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'tabla.css';
+@import 'botonera.css';
+@import 'tabla_desplegable.css';
+
+#main #contenido .cartera{
+    width: 100%;
+    max-width: 960px;
+    background-color: rgba(226, 202, 66, 0.95);
+    font-family: 'Days One', sans-serif;
+    color: rgb(0, 0, 0);
+    box-shadow: 0px 3px 5px #000;
+    margin-bottom: 5px;
+    text-align: center;
+    float: right;
+    padding: 3px;
+    border-radius: 10px;
+    border-color: rgb(0, 0,0);
+    border-width: 3px;
+    border-style: solid;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select:none;
+}
+
+#main #contenido .cartera:hover{
+    color: rgba(226, 202, 66, 0.95);
+    background-color: rgb(0, 0, 0) ;
+}
+
+#main #contenido .cartera.activo{
+    color: rgba(226, 202, 66, 0.95);
+    background-color: rgb(0, 0, 0) ;
+}
+
+#main #contenido .desplegable{
+    display: none;
+    width: 100%;
+    margin: auto;
+}

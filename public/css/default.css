@@ -1,0 +1,232 @@
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body{
+    background: url('../images/lunares.png') repeat;
+	background-size: 500px;
+}
+
+body::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgba(109, 199, 202, 0.7);
+}
+body::-webkit-scrollbar-thumb{
+    background-color: rgb(26, 66, 129);
+}
+
+#header{
+    width: 100%;
+    height: 70px;
+    background: -moz-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 13%, rgba(27,68,133,1) 100%); /* ff3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(27,68,133,1)), color-stop(87%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,1))); /* safari4+,chrome */
+	background: -webkit-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 13%, rgba(27,68,133,1) 100%); /* safari5.1+,chrome10+ */
+	background: -o-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 13%, rgba(27,68,133,1) 100%); /* opera 11.10+ */
+	background: -ms-linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 13%, rgba(27,68,133,1) 100%); /* ie10+ */
+	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 13%, rgba(27,68,133,1) 100%); /* w3c */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1B4485', endColorstr='#000000',GradientType=0 ); /* ie6-9 */
+    box-shadow: 0px 3px 5px #000;
+    /*-webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select:none;*/
+}
+
+#header #container{
+    width: 960px;
+    margin: auto;
+}
+
+#header #container #logo{
+    float:left;
+}
+
+#header #container #logo:hover{
+    cursor: default;
+    
+}
+
+#header #container #logo #imagen{
+    float: left;
+    height: 60px;
+}
+
+#header #container #logo #imagen img{
+	height: 60px;
+	padding: 10px 10px 0 10px;
+}   
+
+#header #container #logo #nombre{
+    float: left;
+    height: 60px;
+}
+
+#header #container #logo #nombre p{
+    padding: 15px 15px 0 0;
+    font-family: 'Days One', sans-serif;
+	font-size: 15px;
+	color: #FFF;
+}
+
+#header #mensaje{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#header #mensaje p{
+    padding-top: 10px;
+    font-family: 'Days One', sans-serif;
+	font-size: 20px;
+    color: #FFF;
+}
+
+#header #info{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#header #info p{
+    padding-top: 10px;
+    font-family: 'Days One', sans-serif;
+	font-size: 15px;
+	color: #FFF;
+}
+
+#main{
+    width: 960px;
+    margin: auto;
+}
+
+.button{
+    margin: 10px 3px 10px 0;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.center{
+    text-align: center;
+}
+
+.esquina_derecha{
+    border-top-right-radius: 10px;;
+}
+
+.esquina_izquierda{
+    border-top-left-radius: 10px;;
+}
+
+.grey{
+    background-color: rgba(197, 194, 194, 0.85) !important;
+    color: #000 !important;
+}
+
+.grey:hover{
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.red{
+    background-color: rgb(247, 35, 35) !important;
+    color: #000 !important;
+}
+
+.red:hover{
+    background-color: #000 !important;
+    color: rgb(247, 35, 35) !important;
+}
+ 
+ 
+.green{
+    background-color: rgb(92, 184, 92) !important;
+    color: #000 !important;
+}
+
+.green:hover{
+    background-color: #000 !important;
+    color: rgb(92, 184, 92) !important;
+}
+ 
+.yellow{
+    background-color: rgb(226, 202, 66) !important;
+    color: #000 !important;
+}
+
+.yellow:hover{
+    background-color: #000 !important;
+    color: rgb(226, 202, 66) !important;
+}
+
+.blue{
+    background-color: rgba(16, 41, 80, 0.9)!important;
+    color: #fff !important;
+}
+
+.blue:hover{
+    background-color: #fff !important;
+    color: rgba(16, 41, 80, 0.9)!important;
+}
+
+.cyan{
+    background-color: rgba(48, 201, 193, 0.7) !important;
+    color: #000 !important;
+}
+
+.pink{
+    background-color: rgba(255, 129, 143, 0.85)!important;
+    color: #000 !important;
+}
+
+.black{
+    background-color: rgba(0,0,0,0.85);
+    color: #fff;
+}
+
+.black_red{
+    background-color:  rgb(104, 27, 27) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+#notificacion{
+    background: transparent;
+    margin: 0 10px;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    width: 5px;
+}
+
+#bell{
+    animation-duration: 1.5s;
+    animation-name: animation;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    color: #ff8800;
+}
+
+.circulito{
+    font-size: 0.5rem;
+    color: rgb(255, 0, 76);
+    position: absolute;
+    z-index: 1000;
+    float: right;
+}
+
+@keyframes animation{
+    from{
+        transform: rotate(45deg);
+    }
+    50%{
+        transform: rotate(-45deg);
+    }
+    to{
+        transform: rotate(45deg);
+    }
+}
+
+#notificacion:hover{
+    cursor: pointer;
+}

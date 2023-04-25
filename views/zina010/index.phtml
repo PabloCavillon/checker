@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/zina010.css">
+    <title>CHECKER PPI - ZINA010</title>    
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="contenido">
+            <div id="scroll">
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th class="center">CODOP</th>
+                            <th class="center">EVENTO</th>
+                            <th class="center">ORIGEN</th>
+                            <th class="center">SENT</th>
+                            <th class="center">PRIMER DESCARTE</th>
+                            <th class="center">ULTIMO DESCARTE</th>
+                            <th class="center">VALIDADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->data as $d){
+                            if ($d['validado'] == 1){
+                                echo '<tr>';
+                            } else {
+                                echo '<tr class="pink">';
+                            } ?>
+                                <td class="center">
+                                    <?php echo $d['codop'];?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $d['evento']; ?>
+                                </td>
+                                 <td class="center">
+                                    <?php echo $d['origen']; ?>
+                                </td>
+                                 <td class="center">
+                                    <?php echo $d['sent']; ?>
+                                </td>
+                                 <td class="center">
+                                    <?php echo $d['encontrado']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $d['ultimo_descarte'];?>
+                                </td>
+                                <td class="center">
+                                    <?php if ($d['validado'] == 1){
+                                        echo '<i class="far fa-laugh-beam"></i>';    
+                                    } else {
+                                        echo '<i class="far fa-frown"></i>';
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/llegada_de_archivos.js"></script>
+</body>
+</html>

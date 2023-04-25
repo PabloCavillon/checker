@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/peso_de_archivos.css">
+    <title>CHECKER PPI - Peso de Archivos</title>    
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <select id="month" class="picker">
+                    <?php foreach ($this->meses as $mes => $nombre) {
+                        if ($mes == $this->mes){
+                            echo "<option value='$mes' selected>$nombre</option>";
+                        } else {
+                            echo "<option value='$mes'>$nombre</option>";
+                        }
+                    } ?>
+                </select>
+                <select id="year" class="picker">
+                    <!-- Se toma 2020 porque a partir de ese año se empezo a ver este control en checker-->
+                    <?php for ($i = $this->year; $i >= 2020; $i--) {
+                        if ($i == $this->year){
+                            echo "<option value='$i' selected>$i</option>";
+                        } else {
+                            echo "<option value='$i'>$i</option>";
+                        }
+                    } ?>
+                </select>
+                <select id="cartera" class="picker">
+                    <?php foreach ($this->carteras as $cartera) {
+                        if ($cartera == $this->cartera){
+                            echo "<option value='$cartera' selected>$cartera</option>";
+                            echo $cartera;
+                        } else {
+                            echo "<option value='$cartera'>$cartera</option>";
+                        }
+                    } ?>
+                </select>
+                <button class="picker hide" id="preli">
+                    VER PRELI
+                </button>
+                <button class="picker" id="liqui">
+                    VER LIQUI
+                </button>
+            </div>
+        </div>
+        <div id="contenido">
+            <div class="scroll" id='tabla_preli'>
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">BANCO</th>   
+                            <th colspan="2">ARCHIVOS - PERIODO <?php echo (isset($this->pesos[1]['periodo_1']) ? $this->pesos[1]['periodo_1'] : "") ?></th>
+                            <th>CARTERA <?php echo $this->cartera ?></th>
+                            <th colspan="2">ARCHIVOS - PERIODO <?php echo (isset($this->pesos[1]['periodo_2']) ? $this->pesos[1]['periodo_2'] : ""); ?></th>
+                        </tr>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>PESO</th>
+                            <th>RELACION</th>
+                            <th>PESO</th>
+                            <th>NOMBRE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $b = "000"; $class = false;
+                            foreach($this->pesos as $peso){
+                            if ($b != $peso['banco']){
+                                $class = !$class;
+                                $b = $peso['banco'];
+                            }
+                            if($peso['tipo'] == 'P'){
+                                echo $class ? "<tr>" : "<tr class='blue'>"; ?>
+                                    <td class="center">
+                                        <?php echo $peso['banco'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['archivo_1'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['peso_1'];?>
+                                    </td>
+                                    <?php if($peso['relacion'] <= 0.5){
+                                            echo '<td class="center red">';
+                                        } else {
+                                            echo '<td class="center grey">';
+                                        }?>
+                                        <?php echo $peso['relacion'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['peso_2'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['archivo_2'];?>
+                                    </td>
+                                </tr>
+                        <?php }} ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="scroll hide" id='tabla_liqui'>
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">BANCO</th>   
+                            <th colspan="2">ARCHIVOS - PERIODO <?php echo (isset($this->pesos[1]['periodo_1']) ? $this->pesos[1]['periodo_1'] : "") ?></th>
+                            <th>CARTERA <?php echo $this->cartera ?></th>
+                            <th colspan="2">ARCHIVOS - PERIODO <?php echo (isset($this->pesos[1]['periodo_2']) ? $this->pesos[1]['periodo_2'] : ""); ?></th>
+                        </tr>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>PESO</th>
+                            <th>RELACION</th>
+                            <th>PESO</th>
+                            <th>NOMBRE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php  $b = "000"; $class = true; 
+                        foreach($this->pesos as $peso){
+                            if ($b != $peso['banco']){
+                                $class = !$class;
+                                $b = $peso['banco'];
+                            }
+                            if($peso['tipo'] == 'L'){
+                            echo $class ? "<tr>" : "<tr class='blue'>"; ?>
+                                    <td class="center">
+                                        <?php echo $peso['banco'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['archivo_1'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['peso_1'];?>
+                                    </td>
+                                    <?php if($peso['relacion'] <= 0.5){
+                                            echo '<td class="center red">';
+                                        } else {
+                                            echo '<td class="center grey">';
+                                        }?>
+                                        <?php echo $peso['relacion'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['peso_2'];?>
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $peso['archivo_2'];?>
+                                    </td>
+                                </tr>
+                        <?php }} ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/peso_de_archivos.js"></script>
+</body>
+</html>

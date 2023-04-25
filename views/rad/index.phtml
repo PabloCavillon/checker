@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/llegada_de_archivos.css">
+    <title>CHECKER PPI - RAD</title>    
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="month" min="<?php echo $this->periodos['min']; ?>" max="<?php echo $this->periodos['max']; ?>" value="<?php echo $this->periodo; ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <div class="scroll">
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">CARTERA</th>
+                            <th rowspan="2">BANCO</th>
+                            <th rowspan="2">PARALELO E-RAD</th>
+                            <th colspan="2">VISA RESUMENES</th>
+                        </tr>
+                        <tr>
+                            <th>PAGINAS TOTALES</th>
+                            <th>PAGINAS PROCESADAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $control = "";
+                            $clase = true;
+                            foreach($this->data as $d){ 
+                                if ($d['cartera'] != $control) { 
+                                    $clase = !$clase; 
+                                    $control = $d['cartera'];
+                                }
+                            ?>
+                            <tr class="<?php 
+                                if($d['tipo'] != "D"){
+                                    if($clase) { 
+                                        echo "grey"; 
+                                    } else { 
+                                        echo "black"; 
+                                    } 
+                                } else {
+                                    echo "blue";
+                                }
+                            ?>">
+                                <td class="center">
+                                    <?php echo $d['cartera'] . " " . $d['tipo'];?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $d['banco'];?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $d['cantidad'];?>
+                                </td>
+                                <td class="center">?</td>
+                                <td class="center">?</td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/rad.js"></script>
+</body>
+</html>

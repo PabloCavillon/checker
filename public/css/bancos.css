@@ -1,0 +1,21 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'tabla.css';
+@import 'botonera.css';
+
+#main{
+    margin-top: 30px;
+}
+
+
+.title{
+    font-family: 'Days One', sans-serif;
+}
+
+.data{
+    font-family: 'Days One', sans-serif;
+}
+
+.table-alert{
+    width: 100%;
+}

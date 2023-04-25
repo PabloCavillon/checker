@@ -1,0 +1,129 @@
+<div id="sidebar">
+    <ul>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>diarias">
+                    <p onmouseover="toggle_descripcion('desc-diarias')" onmouseout="toggle_descripcion('desc-diarias')" class="icono">
+                        <i class="fas fa-tasks" aria-hidden="true"></i>
+                    </p>
+                    <p id="desc-diarias" class="descripcion">Diarias</p>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>liquidaciones">
+                    <p onmouseover="toggle_descripcion('desc-liqui')" onmouseout="toggle_descripcion('desc-liqui')" class="icono">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </p>
+                    <p id="desc-liqui" class="descripcion">Liquidaciones</p>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>pre_liquidaciones">
+                    <p onmouseover="toggle_descripcion('desc-preli')" onmouseout="toggle_descripcion('desc-preli')" class="icono">
+                        <i class="fas fa-search-dollar"></i>
+                    </p>
+                    <p id="desc-preli" class="descripcion">Preliquidaciones</p>
+                </a>
+            </div>
+        </li>
+        <?php 
+        if($_SESSION['tipo'] == 3){ ?>
+            <li>
+                <div class="opcion">
+                    <a class="button-menu" href="<?php echo constant('URL')?>recuperador">
+                        <p onmouseover="toggle_descripcion('desc-recuperador')" onmouseout="toggle_descripcion('desc-recuperador')" class="icono">
+                            <i class="fas fa-recycle"></i>
+                        </p>
+                        <p id="desc-recuperador" class="descripcion">Recuperador</p>
+                    </a>
+                </div>
+            </li>
+        <?php } ?>
+        <!--li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>estadisticas">
+                    <p onmouseover="toggle_descripcion('desc-estadisticas')" onmouseout="toggle_descripcion('desc-estadisticas')" class="icono">
+                        <i class="fas fa-chart-pie"></i>
+                    </p>
+                    <p id="desc-estadisticas" class="descripcion">Estadisticas</p>
+                </a>
+            </div>
+        </li-->
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>feriados">
+                    <p onmouseover="toggle_descripcion('desc-feriados')" onmouseout="toggle_descripcion('desc-feriados')" class="icono">
+                        <i class="far fa-calendar-alt"></i>
+                    </p>
+                    <p id="desc-feriados" class="descripcion">Feriados</p>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>bancos">
+                    <p onmouseover="toggle_descripcion('desc-bancos')" onmouseout="toggle_descripcion('desc-bancos')" class="icono">
+                        <i class="fas fa-landmark"></i>
+                    </p>
+                    <p id="desc-bancos" class="descripcion">Bancos</p>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>indicadores">
+                    <p onmouseover="toggle_descripcion('desc-indicadores')" onmouseout="toggle_descripcion('desc-indicadores')" class="icono">
+                        <i class="fas fa-chart-bar"></i>
+                    </p>
+                    <p id="desc-indicadores" class="descripcion">Indicadores</p>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>adquirencia">
+                    <p onmouseover="toggle_descripcion('desc-adquirencia')" onmouseout="toggle_descripcion('desc-adquirencia')" class="icono">
+                        <i class="fas fa-store"></i>
+                    </p>
+                    <p id="desc-adquirencia" class="descripcion">Adquirencia</p>
+                </a>
+            </div>
+        </li>
+        <!--li>
+            <div class="opcion">
+                <a class="button-menu" href="#">
+                    <p onmouseover="toggle_descripcion('desc-indicadores')" onmouseout="toggle_descripcion('desc-indicadores')" class="icono">
+                        <i class="fas fa-chart-area"></i>
+                    </p>
+                    <p id="desc-indicadores" class="descripcion">Indicadores</p>
+                </a>
+            </div>
+        </li-->
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>incidentes">
+                    <p onmouseover="toggle_descripcion('desc-incidentes')" onmouseout="toggle_descripcion('desc-incidentes')" class="icono">
+                        <i class="fas fa-toilet-paper"></i>
+                    </p>
+                    <p id="desc-incidentes" class="descripcion">Incidentes</p>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="opcion">
+                <a class="button-menu" href="<?php echo constant('URL')?>login\cerrar_sesion">
+                    <p onmouseover="toggle_descripcion('desc-cerrar')" onmouseout="toggle_descripcion('desc-cerrar')" class="icono">
+                        <i class="fas fa-door-open"></i>
+                    </p>
+                    <p id="desc-cerrar" class="descripcion">Salir</p>
+                </a>
+            </div>
+        </li>
+        
+    </ul>   
+</div>
+<script src="<?php echo constant('URL') ?>js/menu.js"></script>

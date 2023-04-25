@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/pre_liquidaciones.css">
+    <title>CHECKER PPI - Preliquidaciones</title>
+</head>
+<body>
+<?php require 'views/header.phtml';?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <button class="button" id="ver_mios" value="<?php echo $_SESSION['username'];?>">VER MIOS  <i class="fas fa-user-tag"></i></button>
+            </div>
+            <div id="estados">
+                <button value="ok" id="ok" class="button">OK  <i class="fas fa-thumbs-up"></i></button>
+                <button value="error" id="error" class="button">ERROR  <i class="fas fa-thumbs-down"></i></button>
+                <button value="mio" id="mio" class="button">MIO!  <i class="fas fa-child"></i></button>
+            </div>
+        </div>
+        <div id="contenido">
+            <?php foreach($this->carteras as $cartera){
+                $this->tiene_debito = 0; 
+            ?>
+                <div class="cartera" id="<?php echo $cartera ?>" name="btn_cartera">
+                    <h2 id="h2_<?php echo $cartera ?>"><i class="fas fa-hand-point-down"></i> CARTERA <?php echo $cartera ?>  <i class="fas fa-hand-point-down"></i></h2>
+                </div>
+                <div id="table_<?php echo $cartera ?>" class="desplegable">
+                    <table id="table" frame="void" rules="rows">
+                        <thead class="center">
+                            <th class="esquina_izquierda">-</th>
+                            <th>TAREA</th>
+                            <th>CARTERA</th>
+                            <th>ASIGNADO A</th>
+                            <th>FECHA</th>
+                            <th class="esquina_derecha">COMENTARIO</th>
+                        </thead>
+                        <tbody id="tbody">
+                            <?php  
+                                foreach($this->pre_liquidaciones as $preli){ 
+                                    if ($preli->cartera == $cartera && $preli->tipo_cartera == 'C'){ ?>
+                                        <tr id="tr_<?php echo $preli->id; ?>"  <?php echo ($preli->apodo == $_SESSION['apodo']) ? "class=\"grey\"" : ""?>">
+                                            <td class="center">
+                                                <input name="checkbox" type="checkbox" title="<?php echo $preli->id; ?>" id="<?php echo $preli->id; ?>">
+                                            </td>
+                                            <td>
+                                                <?php echo $preli->banco; ?>  -  <?php echo $preli->tarea; ?>
+                                            </td>
+                                            <td class="center">
+                                                <?php echo $preli->cartera ." - ". $preli->tipo_cartera?>
+                                            </td>
+                                            <td class="center" title="<?php echo $preli->usuario ." - ". $preli->interno; ?>">
+                                                <?php echo $preli->apodo; ?>
+                                            </td>
+                                            <td class="center">
+                                                <?php
+                                                    $aux = explode('-', $preli->fecha);
+                                                    echo "$aux[2]-$aux[1]-$aux[0]";
+                                                ?>
+                                            </td>
+                                            <td class="center">
+                                                <button name="comentario" class="button comentario" id="btn_<?php echo $preli->id; ?>" value="<?php echo $preli->comentario?>">
+                                                <i class="far fa-comments"></i></button>
+                                            </td>
+                                        </tr>
+                            <?php   } else {
+                                        if($preli->cartera == $cartera && $preli->tipo_cartera == 'D'){ 
+                                            $this->tiene_debito = 1;
+                                        }
+                                    }
+                                } ?>
+                        </tbody>
+                    </table>
+                    <?php if($this->tiene_debito == 1){ ?>
+                        <table id="table" frame="void" rules="rows">
+                            <thead class="center">
+                                <th class="esquina_izquierda">-</th>
+                                <th>TAREA</th>
+                                <th>CARTERA</th>
+                                <th>ASIGNADO A</th>
+                                <th>FECHA</th>
+                                <th class="esquina_derecha">COMENTARIO</th>
+                            </thead>
+                            <tbody id="tbody">
+                                <?php 
+                                    foreach($this->pre_liquidaciones as $preli){ 
+                                    if ($preli->cartera == $cartera && $preli->tipo_cartera == 'D'){ ?>
+                                    <tr id="tr_<?php echo $preli->id; ?>"  <?php echo ($preli->apodo == $_SESSION['apodo']) ? "class=\"grey\"" : "class=\"blue\""?>">
+                                        <td class="center">
+                                            <input name="checkbox" type="checkbox" title="<?php echo $preli->id; ?>" id="<?php echo $preli->id; ?>">
+                                        </td>
+                                        <td>
+                                            <?php echo $preli->banco; ?>  -  <?php echo $preli->tarea; ?>
+                                        </td>
+                                        <td class="center">
+                                            <?php echo $preli->cartera ." - ". $preli->tipo_cartera?>
+                                        </td>
+                                        <td class="center" title="<?php echo $preli->usuario ." - ". $preli->interno; ?>">
+                                            <?php echo $preli->apodo; ?>
+                                        </td>
+                                        <td class="center">
+                                            <?php
+                                                $aux = explode('-', $preli->fecha);
+                                                echo "$aux[2]-$aux[1]-$aux[0]";
+                                            ?>
+                                        </td>
+                                        <td class="center">
+                                            <button name="comentario" class="button comentario" id="btn_<?php echo $preli->id; ?>" value="<?php echo $preli->comentario?>">
+                                            <i class="far fa-comments"></i></button>
+                                        </td>
+                                    </tr>
+                                <?php }} ?>
+                            </tbody>
+                        </table>
+                    <?php }?>
+                </div>
+             <?php } ?>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/preliquidaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html> 

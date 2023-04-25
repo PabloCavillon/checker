@@ -1,0 +1,41 @@
+<header id="header">
+    <div id="container">
+        <div id="logo">
+            <div id="imagen">
+                <img src="<?php echo constant('URL') . "public/images/logo_blanco.png"; ?>" alt="Checker">
+            </div>
+            <div id="nombre">
+                <p>PRISMA PPI</br>CHECKER  <i class="fas fa-search"></i></p>
+            </div>
+        </div>
+        <div id="mensaje">
+            <?php $dia = date('d/m');
+                if ($_SESSION['cumple'] == $dia){ ?>
+                    <p>
+                        <i class="far fa-laugh-beam"></i> 
+                        <i class="fas fa-gift"></i> 
+                        ¡FELIZ CUMPLE <?php echo $_SESSION['apodo'] ?>! 
+                        <i class="fas fa-gifts"></i>
+                        <i class="fas fa-birthday-cake"></i> 
+                    </p>
+                <?php } else { ?>   
+                    <p>¡Buen día <?php echo $_SESSION['apodo'] ?>! <i class="far fa-laugh-beam"></i></p>
+                <?php }
+            ?>
+        </div>
+        <div id="info">
+            <p> 
+                <?php	
+                    $jul = date('z') + 1;
+                    $ayer = date("d-m-Y",strtotime(date("d-m-Y")."- 1 days"));
+                    $ayer = str_split($ayer, 2);
+                    $cartera = '0' . $ayer[0];  
+                    $info = "Hoy es ".strftime("%A, %d de %B del %Y") . " - Juliano: $jul" . " - Cartera: $cartera";
+                    echo $info; 
+                ?>
+            </p>
+        </div>
+    </div>
+</header>
+<?php require 'views/menu.phtml'; ?>
+<script src="<?php echo constant('URL');?>js/cookies.js"></script>

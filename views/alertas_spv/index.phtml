@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/alertas_spv.css">
+    <title>CHECKER PPI - Alertas SPV</title>
+</head>
+<body>
+    <?php require 'views/header.phtml'; ?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+                <button name="alerta" id="alerta" class="button red" type="submit">En caso de problemas hacer click  <i class="fas fa-exclamation-triangle"></i></button>
+            </div>
+        </div>
+        <div id="contenido">
+            <div class="scroll">
+                <table id="table" frame="void" rules="rows">
+                    <thead> 
+                        <tr>
+                            <th class="center td_id">ID</th>
+                            <th class="center td_banco">BANCO</th>
+                            <th class="center td_alerta">ALERTA</th>
+                            <th class="center td_hora">HORA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->alertas as $alerta){ ?>
+                            <tr>
+                                <td class="center td_id">
+                                    <?php echo $alerta['id']; ?>
+                                </td>
+                                <td class="center td_banco">
+                                    <?php echo $alerta['banco']; ?>
+                                </td>
+                                <td class="center td_alerta">
+                                    <?php echo $alerta['alerta']; ?>
+                                </td>
+                                <td class="center td_hora">
+                                    <?php echo $alerta['hora']; ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/alertas_spv.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html>

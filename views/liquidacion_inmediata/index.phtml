@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/liquidacion_inmediata.css">
+    <title>CHECKER PPI - Inmediata</title>
+</head>
+<body>
+    <?php require 'views/header.phtml'?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+             <div class="mensaje">
+                <p>EL ÚLTIMO PCCGCOE CARGADO EN LA BD SE PROCESO A LAS <?php echo $this->ultima_hora ?></p>
+            </div>
+        </div>
+        <div id="contenido">
+            <?php if ($this->rechazos_por_lote != []){?>
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="center">RECHAZOS POR LOTE</th>
+                        </tr>
+                        <tr>
+                            <th class="center">BANCO</th>
+                            <th class="center">ARCHIVO</th>
+                            <th class="center">DESCRIPCION</th>
+                            <th class="center">CANTIDAD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->rechazos_por_lote as $rechazos_lote){?>
+                        <tr class="pink">
+                            <td class='center'> <?php echo $rechazos_lote['id_banco'] ?> </td>
+                            <td class='center'> <?php echo $rechazos_lote['archivo'] ?> </td>
+                            <td class='center'> <?php echo $rechazos_lote['descripcion'] ?> </td>
+                            <td class='center'> <?php echo $rechazos_lote['cantidad'] ?></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+            <table id="table" frame="void" rules="rows">
+                <thead> 
+                    <tr>
+                        <th class="center">BANCO</th>
+                        <th class="center">ZLEI001</th>
+                        <th class="center">TC40</th>
+                        <th class="center">VNET</th>
+                        <th class="center">RECHAZOS</th>
+                        <th class="center">DETALLE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->resumen as $resumen) { ?>
+                        <tr>
+                            <td class="center">
+                                <?php echo $resumen['banco']; ?>
+                            </td>
+                            <td class="center">
+                                <?php echo $resumen['zlei001']; ?>
+                            </td>
+                            <td class="center">
+                                <?php echo $resumen['tc40']; ?>
+                            </td>
+                            <td class="center">
+                                <?php echo $resumen['vnet']; ?>
+                            </td>
+                            <td class="center">
+                                <p><?php echo $resumen['rechazos']; ?></p>
+                                <?php if($resumen['rechazos'] > 0){ ?>
+                                    <button class="button rechazo" title="Expandir rechazos" name="expansion_rechazos" value="<?php echo $resumen['banco']; ?>">
+                                        <i class="fas fa-sort-down"></i>
+                                    </button>    
+                                <?php } else {?>
+                                    <button class="button rechazo" title="Expandir rechazos" name="expansion_rechazos" value="<?php echo $resumen['banco']; ?>" disabled>
+                                        <i class="fas fa-sort-down"></i>
+                                    </button> 
+                                <?php } ?>
+                            </td>
+                            <td class="center">
+                                <button name="expansion_detalle" class="button" title="Ver detalle del banco" value="<?php echo $resumen['banco']?>">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="mostrar" name="detalle_<?php echo $resumen['banco']; ?>">
+                            <td colspan="9" class="cyan center">
+                                DETALLE <?php echo $resumen['banco'];?>
+                            </td>
+                        </tr>
+                        <tr class="mostrar" name="detalle_<?php echo $resumen['banco']; ?>">
+                            <td colspan="2" class="cyan center detalle">
+                                ZLEI001
+                            </td>
+                            <td colspan="2" class="cyan center detalle">
+                                TC40
+                            </td>
+                            <td colspan="2" class="cyan center detalle">
+                                VNET
+                            </td>
+                        </tr>
+                        <?php foreach ($this->bancos as $banco) {
+                            if($resumen['banco'] == $banco['cod_banco']){
+                                for ($i = 0; $i < max(count($banco['zlei001']), count($banco['tc40']), count($banco['vnet'])); $i++){ ?>
+                                    <tr class="mostrar" name="detalle_<?php echo $resumen['banco']; ?>">
+                                        <td class="center blue detalle" colspan="2">
+                                            <?php if(isset($banco['zlei001'][$i])){
+                                                echo $banco['zlei001'][$i];
+                                            } else {
+                                                echo "";
+                                            }?>
+                                        </td>
+                                        <td class="center blue detalle" colspan="2">
+                                            <?php if(isset($banco['tc40'][$i]['tc40'])){
+                                                echo $banco['tc40'][$i]['tc40']; 
+                                            } else {
+                                                echo "";
+                                            } ?>
+                                        </td>
+                                        <td class="center blue detalle" colspan="2">
+                                            <?php if(isset($banco['vnet'][$i])){ 
+                                                echo $banco['vnet'][$i];
+                                             } else {
+                                                 echo "";
+                                             } ?>
+                                        </td>
+                                    </tr>
+                        <?php }}} ?>
+                        <?php foreach ($this->bancos as $banco) {
+                            if($resumen['rechazos'] > 0 && $resumen['banco'] == $banco['cod_banco']) { ?>
+                                <tr class="mostrar" name="rechazos_<?php echo $resumen['banco']; ?>">
+                                    <td colspan="8" class="center pink">
+                                        RECHAZOS <?php echo $resumen['banco']; ?>
+                                    </td>
+                                </tr>
+                                <tr class="mostrar" name="rechazos_<?php echo $resumen['banco']; ?>">
+                                    <td class="center pink detalle">
+                                        ZLEI001
+                                    </td>
+                                    <td class="center pink detalle">
+                                        CODOP
+                                    </td>
+                                    <td class="center pink detalle">
+                                        NRO TARJETA
+                                    </td>
+                                    <td class="center pink detalle">
+                                        PDV
+                                    </td>
+                                    <td class="center pink detalle">
+                                        IMPORTE
+                                    </td>
+                                    <td class="center pink detalle">
+                                        DESCRIPCION
+                                    </td>
+                                </tr>
+                                <?php for($i = 0; $i < count($banco['rechazos']); $i++) {?>
+                                <tr class="mostrar" name="rechazos_<?php echo $resumen['banco']; ?>">
+                                    <td class="center black_red detalle">
+                                        <?php echo $banco['rechazos'][$i]['archivo']; ?>
+                                    </td>
+                                    <td class="center black_red detalle">
+                                        <?php echo $banco['rechazos'][$i]['codop']?>
+                                    </td>
+                                    <td class="center black_red detalle">
+                                        <?php echo $banco['rechazos'][$i]['nro_tarjeta']?>
+                                    </td>
+                                    <td class="center black_red detalle">
+                                        <?php echo $banco['rechazos'][$i]['pdv']?>
+                                    </td>
+                                    <td class="center black_red detalle">
+                                        <?php echo $banco['rechazos'][$i]['importe']?>
+                                    </td>
+                                    <td class="center black_red detalle">
+                                        <?php echo $banco['rechazos'][$i]['descripcion']?>
+                                    </td>
+                                </tr>
+                    <?php }}}} ?>    
+                </tbody>
+            </table>
+            <?php if($this->tipos_rechazos != []){ ?>
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <th class="center">TIPOS DE RECHAZO</th>
+                        <th class="center">CANTIDAD</th>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->tipos_rechazos as $tipos){?>
+                        <tr class="blue">
+                            <td class='center'> <?php echo $tipos['descripcion'] ?> </td>
+                            <td class='center'> <?php echo $tipos['cantidad'] ?></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/control_inmediata.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'botonera.css';
+@import 'tabla.css';
+
+#main #botonera #filtros #datepicker{
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    color: #000;
+    background: rgb(48, 201, 193);
+    font-family: 'Days One', sans-serif;
+    font-size: 13px;
+}
+
+#main #contenido #table thead th{
+    position: sticky;
+    top:0;
+}
+
+#main #contenido #table tbody{
+    font-size: 15px;
+}
+
+#main #contenido #table tbody tr td button:disabled{
+    cursor: default;
+    background-color: rgb(116, 116, 116);
+}
+
+#main #contenido #table tbody tr.mostrar{
+    display: none;
+}
+
+
+.grafico {
+    font-family: 'Days One', sans-serif;
+    background-color: white !important; 
+}

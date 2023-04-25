@@ -1,0 +1,1 @@
+window.location = 'http://wdbs-prpm031:8080/Reports/report/PPI/Control%20Mensajeria%20Cajas%20Autorizados%20vs%20Presentados';

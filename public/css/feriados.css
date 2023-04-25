@@ -1,0 +1,46 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'botonera.css';
+@import 'tabla.css';
+
+#filtros{
+    transition: all 0.3s;
+}
+
+#filtros input {
+    transition: all 0.3s;
+    height: 27px;
+    width: 0;
+    padding: 0;
+    border: 0;
+    display: inline;
+}
+
+#filtros input.activate{
+    padding: 3px;
+    width: 150px;
+    color: #000;
+    font-size: 13px;
+    font-family: 'Days One', sans-serif;
+    border-style: solid;
+    border-radius: 5px;
+    border: 2px solid #000;
+    max-width: 155px;
+}
+
+#new_feriado{
+    position: relative;
+}
+
+.table, .title_alert, .text_alert{
+    margin:auto;
+    font-family: 'Days One', sans-serif;
+}
+
+.table tr td{
+    padding: 5px;
+}
+
+.delete{
+    display: none;
+}

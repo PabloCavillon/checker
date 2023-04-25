@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/archivos_diarios.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <title>CHECKER PPI - Archivos Diarios</title>
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <table id="table" frame="void" rules="rows">
+                <thead class="center">
+                    <th>TIPO ARCHIVO</th>
+                    <th>CANTIDAD</th>
+                    <th>PRIMERO</th>
+                    <th>ÚLTIMO</th>
+                    <th>DETALLE</th>
+                </thead>
+                <tbody id="tbody">
+                    <?php foreach($this->archivos as $archivo){ ?>
+                        <tr>
+                            <td class="center">
+                                <?php echo $archivo['nombre'] ?>
+                            </td>
+                            <td class="center">
+                                <?php echo $archivo['cantidad'] ?>
+                            </td>
+                            <td class="center">
+                                <?php echo $archivo['primero'] ?>
+                            </td>
+                            <td class="center">
+                                <?php echo $archivo['ultimo'] ?>
+                            </td>
+                            <td class="center">
+                                <button name="expansion_detalle" class="button" title="Ver detalle del archivo" value="<?php echo $archivo['nombre']?>">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr class="mostrar" name="<?php echo $archivo['nombre']?>">
+                            <td class="center cyan">
+                                BANCO
+                            </td>
+                            <td colspan="2" class="center cyan">
+                                NOMBRE ARCHIVO
+                            </td>
+                            <td colspan="2" class="center cyan">
+                                HORA
+                            </td>
+                        </tr>
+
+                        <?php 
+                            $resumen = $this->resumenes[$archivo['nombre']]; 
+                            foreach($resumen as $r){ ?>
+                            <tr class="mostrar" name="<?php echo $archivo['nombre']?>"> 
+                                <td class="center blue">
+                                    <?php echo $r['banco'] ?>
+                                </td>
+                                <td colspan="2" class="center blue">
+                                    <?php echo $r['archivo'] ?>
+                                </td>
+                                <td colspan="2" class="center blue">
+                                    <?php echo $r['hora'] ?>
+                                </td>
+                            </tr>
+                    <?php }} ?>
+                </tbody>
+            </table>
+            <!--div class="grafico">
+                <h3> Hora / Juliano </h3>
+                <div id="grafico" style="width: 900px;"></div>
+            </div-->
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        const data = <?php echo json_encode($this->data);?> ;
+    </script>
+    <script src="<?php echo constant('URL'); ?>js/archivos_diarios.js"></script>
+</body>
+</html>

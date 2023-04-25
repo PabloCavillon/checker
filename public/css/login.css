@@ -1,0 +1,175 @@
+img{
+	height: 200px;
+	
+}
+
+.contenedor {
+	max-width: 600px;
+	width: 90%;
+	margin: auto;
+}
+
+.titulo {
+	font-weight: 300;
+	font-family: 'Days One', sans-serif;
+	/*color: #1B4485;*/
+    color: #FFFFFF;
+    text-align: center;
+	text-shadow: 7px 6px 6px rgba(0,0,0,0.86);
+}
+
+h2.titulo{
+	margin: 0 0 20px 0;
+}
+
+.border {
+	margin: 60px 0 10px 0;
+	border:none;
+	margin-bottom: 5px; 
+	border-top:10px solid #FCDB00;
+	background: none;
+	color:none;
+	box-shadow: 11px 10px 19px -2px rgba(0,0,0,1);
+	background: rgba(4,54,103,0.61);
+	background: -moz-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(4,54,103,0.61)), color-stop(44%, rgba(4,54,103,0.78)), color-stop(100%, rgba(0,0,0,1)));
+	background: -webkit-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: -o-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: -ms-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: linear-gradient(to bottom, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#043667', endColorstr='#000000', GradientType=0 );
+}
+
+.formulario {
+	background: rgba(6,75,144,0.8);
+	padding: 30px;
+	margin-bottom: 30px;
+	border-color: #E8325A;
+	border-width: 6px;
+	border-style: solid;
+	box-shadow: 11px 10px 19px -2px rgba(0,0,0,1);
+	background: rgba(4,54,103,0.61);
+	background: -moz-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(4,54,103,0.61)), color-stop(44%, rgba(4,54,103,0.78)), color-stop(100%, rgba(0,0,0,1)));
+	background: -webkit-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: -o-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: -ms-linear-gradient(top, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	background: linear-gradient(to bottom, rgba(4,54,103,0.61) 0%, rgba(4,54,103,0.78) 44%, rgba(0,0,0,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#043667', endColorstr='#000000', GradientType=0 );
+}
+
+.formulario .imagen{
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.formulario .form-group {
+	width: 75%;
+	margin-bottom: 10px;
+	margin: 10px auto;
+}
+
+.formulario input[type="text"],
+.formulario input[type="password"] {
+	padding: 14px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	line-height: 18px;
+	border: none;
+	vertical-align: top;
+	border-color: #E8325A;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.formulario .icono {
+	padding: 15px;
+	text-align: center;
+	width: 48px;
+	max-height: 48px;
+	font-size: 21px;
+	line-height: 18px;
+	background: #FCDB00;
+	display: inline-block;
+	color:#E8325A;
+	vertical-align: top;
+	border-color: #E8325A;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.formulario .icono {
+	margin-right: 4px;
+	-webkit-border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px;
+	-ms-border-radius: 3px 0 0 3px;
+	-o-border-radius: 3px 0 0 3px;
+	border-radius: 3px 0 0 3px;
+}
+
+.formulario .usuario,
+.formulario .password {
+	width: calc(100% - 52px);
+	-webkit-border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	-ms-border-radius: 0 3px 3px 0;
+	-o-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+}
+
+.formulario .password_btn {
+	width: calc(100% - 105px);
+}
+
+.formulario .error ul {
+	padding: 0 15px;
+}
+
+.formulario .error ul li {
+	margin-bottom: 10px;	
+}
+
+.formulario .submit-btn {
+	padding: 14px;
+	text-align: center;
+	width: 48px;
+	max-height: 48px;
+	font-size: 18px;
+	line-height: 18px;
+	background: #1B4485;
+	display: inline-block;
+	cursor: pointer;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #E8325A;
+	color:#E8325A;
+	background: #1CB6B8;
+	-webkit-border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	-ms-border-radius: 0 3px 3px 0;
+	-o-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+}
+
+.formulario .submit-btn:hover {
+	color: #1CB6B8;
+	background: #E8325A;
+	border-color: #1CB6B8;
+}
+
+.formulario .errores{
+	padding: 15px;
+	margin: 3px;
+	background: #FFCCCC;
+	border-style: solid;
+	border-color: #E60000;
+	border-width: 2px;
+	list-style: none;
+	color: #800000;
+	text-align: center;
+	-webkit-border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	-ms-border-radius: 0 3px 3px 0;
+	-o-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+}

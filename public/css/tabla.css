@@ -1,0 +1,103 @@
+#main #contenido .scroll{
+    height: 75vh;
+    max-height: 700px;
+    overflow-y: auto;
+    min-width: 960px;
+    border-radius: 10px;
+}
+
+#main #contenido .scroll::-webkit-scrollbar{
+    width: 7px;
+    background-color: rgba(218, 187, 190, 0.8);
+}
+
+#main #contenido .scroll::-webkit-scrollbar-thumb{
+    background-color: #ff5265;
+}
+
+#main #contenido #table{
+    background-color: rgba(0,0,0,0.85);
+    color: #fff;
+    font-family: 'Days One', sans-serif;
+    font-size: 12px;
+    width: 100%;
+    border-radius: 10px;
+    /*-webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select:none;*/
+    margin-bottom: 5px;
+}
+
+#main #contenido #table thead th{
+    background: -moz-linear-gradient(270deg, rgba(255,193,7,1) 0%, rgba(255,193,7,1) 74%, rgba(45,45,45,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,193,7,1)), color-stop(74%, rgba(255,193,7,1)), color-stop(100%, rgba(45,45,45,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(270deg, rgba(255,193,7,1) 0%, rgba(255,193,7,1) 74%, rgba(45,45,45,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(270deg, rgba(255,193,7,1) 0%, rgba(255,193,7,1) 74%, rgba(45,45,45,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(270deg, rgba(255,193,7,1) 0%, rgba(255,193,7,1) 74%, rgba(45,45,45,1) 100%); /* ie10+ */
+    background: linear-gradient(180deg, rgba(255,193,7,1) 0%, rgba(255,193,7,1) 74%, rgba(45,45,45,1) 100%); /* w3c */
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    color: #000;
+    padding: 5px 8px;
+}
+
+#main #contenido #table tbody tr:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+#main #contenido #table tbody tr td{
+    border-bottom: #fff;
+    border-bottom-width: 3px;
+    padding: 2px 5px;
+    height: 35px;
+}
+
+#main #contenido #table tbody tr td input[type=checkbox]{
+    transform: scale(1.5);
+    padding: 3px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+#main #contenido #table tbody tr td input[type=checkbox]:disabled{
+    cursor: default;
+}
+
+#main #contenido #table tbody tr td .button{
+    background-color: #fff;
+    color: #000;
+    border-color: #000;
+    border-width: 1px;
+    padding: 3px;
+    font-family: 'Days One', sans-serif;
+    margin: 3px auto;
+}
+
+#main #contenido #table tbody tr td .button:hover{
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+}
+
+#main #contenido #table tbody tr td .button i{
+    font-size: 14px;
+    width: 17px;
+}
+
+#main #contenido #table tbody tr td textarea{
+    width: 100%;
+    height: 100px;
+    resize: none;    
+    color:#000;
+    margin:2px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.alert_textarea{
+    background-color: #FFF !important;
+    color: #000 !important;
+}

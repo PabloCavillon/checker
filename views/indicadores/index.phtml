@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo constant('URL') ?>public\css\indicadores.css">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <title>CHECKER PPI - Indicadores</title>
+</head>
+<body>
+    <?php require 'views/header.phtml' ?>
+
+    <div id="main">
+        <form>
+            <div id="botonera">
+                <div id="filtros">
+                    <input type="date"  name="day"    id="day"  class="button">
+                    <input type="week"  name="week"   id="week"  class="button">
+                    <input type="month" name="month"  id="month" class="button">
+
+                    <select name="vista" id="vista" class="button">
+                        <option value="diaria" >DIARIA </option>
+                        <option value="semanal">SEMANAL</option>
+                        <option value="mensual">MENSUAL</option>
+                    </select>
+                    <select name="tipo" id="tipo" class="button">
+                        <option value="adquirencia">ADQUIRENCIA </option>
+                        <option value="emision"    >EMISION</option>
+                    </select>
+                </div>
+            </div>
+            <div id="contenido">
+                <div id="adquirencia" >
+                    <h2>ADQUIRENCIA</h2>
+                    <canvas id="grafica_adquirencia" style="display: inline-block; height: 65vh; width:49%;"></canvas>
+                    <div id="tabla_adquirencia" class="cuadro scrollbar">
+                        <table id="table" frame="void" rules="rows">
+                            <thead>
+                                <th>BANCO</th>
+                                <th>LIQUIDACIONES</th>
+                                <th>MOVIMIENTOS</th>
+                            </thead>
+                            <tbody>
+                                <?php foreach($this->adquirencia as $indicador){ ?>
+                                    <tr>
+                                        <td><?php echo $indicador['banco']; ?></td>
+                                        <td><?php echo number_format( $indicador['liquidaciones'], '0', '', '.'); ?></td>
+                                        <td><?php echo number_format( $indicador['movimientos'], '0', '', '.'); ?></td>
+                                    </tr>
+                                <?php } ?> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="emision" class="hide">
+                    <h2>EMISION</h2>
+                    <canvas id="grafica_emision" style="display: inline-block; height: 45vh; width:100%;"></canvas>
+                    <div id="tabla_emision" class="cuadro scrollbar">
+                        <table id="table" frame="void" rules="rows">
+                            <thead>
+                                <th>CARTERA</th>
+                                <th>CUENTAS</th>
+                                <th>CUENTAS CON MOVIMIENTOS</th>
+                                <th>MOVIMIENTOS</th>
+                            </thead>
+                            <tbody>
+                                <?php foreach($this->emision as $indicador){ ?>
+                                    <tr>
+                                        <td><?php echo $indicador['cartera']; ?></td>
+                                        <td><?php echo number_format( $indicador['cuentas'], '0', '', '.'); ?></td>
+                                        <td><?php echo number_format( $indicador['cuentas_con_movimientos'], '0', '', '.'); ?></td>
+                                        <td><?php echo number_format( $indicador['movimientos'], '0', '', '.'); ?></td>
+                                    </tr>
+                                <?php } ?> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let adquirencia = <?php echo json_encode($this->adquirencia);?>;
+        let emision = <?php echo json_encode($this->emision);?>;
+    </script>
+    <script src="<?php constant('URL')?>js\Chart.js"></script>
+    <script src="<?php constant('URL')?>js\indicadores.js"></script>
+</body>
+</html>

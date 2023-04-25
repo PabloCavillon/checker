@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<?php echo constant('URL') ?>public/css/default.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo constant('URL') ?>public/css/login.css">
+    <title>¡Bienvenido a Checker!</title>
+</head>
+<body>
+    <div class="contenedor contenido">
+        <hr class="border">
+
+        <form action="<?php echo constant('URL'); ?>login/verificar" method="POST" name="login" class="formulario">
+            <h1 class="titulo">¡BIENVENIDO A CHECKER!</h1>
+            <h2 class="titulo">La web del controller</i></h2>
+            <div class="imagen">
+                <img src="<?php echo constant('URL'); ?>public/images/logo.png" alt="Logo de Checker">
+            </div>    
+            <div class="form-group">
+                <i class="icono fas fa-user-secret" aria-hidden="true"></i><input class="usuario" type="text" name="usuario" placeholder="Usuario">
+            </div>
+            <div class="form-group">
+                <i class="icono fa fa-lock"></i><input class="password_btn" type="password" name="password" placeholder="Password">
+		    	<button type="submit" class="submit-btn"><i class="fa fa-arrow-right"></i></button>
+            </div>
+			<?php if (!empty($errores)): ?>
+				<div class="errores">
+					<?php echo $errores;  ?>
+				</div>
+			<?php endif; ?>
+        </form>
+    </div>
+</body>
+</html>

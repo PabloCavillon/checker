@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/zcgea010.css">
+    <title>CHECKER PPI - Rechazos ZCGA010</title>
+</head>
+<body>
+    <?php require 'views/header.phtml'?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <?php if($this->tipos_rechazos != []){ ?>
+                <div id="titulo">
+                    <span>RECHAZOS ZCGA010</span>
+                </div>
+                <table id="table" frame="void" rules="rows">
+                    <thead> 
+                        <th class="center" colspan="2">BANCO</th>
+                        <th class="center" colspan="3">TIPOS DE RECHAZO</th>
+                        <th class="center">CANTIDAD</th>
+                    </thead> 
+                    <tbody> 
+                        <?php foreach($this->tipos_rechazos as $tipo){?>
+                            <tr> 
+                                <td class='center' colspan="2"> <?php echo $tipo['banco'] ?></td>
+                                <td class='center' colspan="3"> <?php echo $tipo['descripcion'] ?></td>
+                                <td class='center'>
+                                    <p><?php echo $tipo['cantidad'] ?></p>
+                                    <button 
+                                        class="button rechazo" 
+                                        title="Expandir rechazos" 
+                                        name="expansion_rechazos" 
+                                        value="<?php echo $tipo['banco'].'_'.$tipo['descripcion']; ?>"
+                                    >
+                                        <i class="fas fa-sort-down"></i>
+                                    </button>    
+                                </td>
+                            </tr> 
+                            <tr class="cyan mostrar" name="rechazos_<?php echo $tipo['banco'].'_'.$tipo['descripcion']; ?>">
+                                <td class='center'>CODOP</td>
+                                <td class='center'>REFERENCIA</td>
+                                <td class='center'>FECHA MOVIMIENTO</td>
+                                <td class='center'>PUNTO DE VENTA</td>
+                                <td class='center'>NRO TARJETA</td>
+                                <td class='center'>IMPORTE</td>
+                            </tr>
+                            <?php
+                                
+                                foreach($this->rechazos as $rechazo){
+                                if ($tipo['banco'] == $rechazo['banco'] && $tipo['descripcion'] == $rechazo['descripcion']) { ?>
+                                <tr class="blue mostrar" name="rechazos_<?php echo $tipo['banco'].'_'.$tipo['descripcion']; ?>"> 
+                                    <td class='center'> <?php echo $rechazo['codop'] ?></td>
+                                    <td class='center'> <?php echo $rechazo['nro_referencia'] ?></td>
+                                    <td class='center'> <?php echo $rechazo['fecha'] ?></td>
+                                    <td class='center'> <?php echo $rechazo['pdv'] ?></td>
+                                    <td class='center'> <?php echo $rechazo['nro_tarjeta'] ?></td>
+                                    <td class='center'> <?php echo "( " . $rechazo['moneda']." ) " . round($rechazo['importe'], 2); ?></td>
+                                </tr> 
+                        <?php }}} ?>           
+                    </tbody>
+                </table>
+            <?php } ?>
+
+            <?php if($this->rechazo_zgea500 != []){ ?>
+                <div id="titulo">
+                    <span>RECHAZOS ZGEA500</span>
+                </div>
+                <table id="table" frame="void" rules="rows">
+                    <thead> 
+                        <th class="center">FECHA INGRESO</th>
+                        <th class="center">BANCO</th>
+                        <th class="center">TARJETA</th>
+                        <th class="center">TRANSACCION</th>
+                        <th class="center">IMPORTE</th>
+                        <th class="center">PUNTO DE VENTA</th>
+                    </thead> 
+                    <tbody> 
+                        <?php foreach($this->rechazo_zgea500 as $rechazo){?>
+                            <tr> 
+                                <td class='center'> <?php echo $rechazo['fecha'] ?></td>
+                                <td class='center'> <?php echo $rechazo['banco'] ?></td>
+                                <td class='center'> <?php echo $rechazo['tarjeta'] ?></td>
+                                <td class='center'> <?php echo $rechazo['transaccion'] ?></td>
+                                <td class='center'> <?php echo "(" . $rechazo['moneda'] . ") " . ($rechazo['importe']/100) ?></td>
+                                <td class='center'> <?php echo $rechazo['pdv'] ?></td>
+                        <?php } ?>           
+                    </tbody>
+                </table>
+            <?php } ?>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/rechazos_zcga010.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/adquirencia_check.css">
+    <title>CHECKER PPI - Adquirencia Check</title>    
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <div class="scroll">
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th class="center td_banco">BANCO</th>
+                            <th class="center td_autorizacion">NRO AUTORIZACIÓN</th>
+                            <th class="center td_tarjeta">TARJETA</th>
+                            <th class="center td_pdv">PUNTO DE VENTA</th>
+                            <th class="center td_importe">IMPORTE</th>
+                            <th class="center td_liquido">¿SE LIQUIDÓ?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->registros as $registro){
+                            if (isset($registro['estliq'])){
+                                echo '<tr>';
+                            } else {
+                                echo '<tr class="pink">';
+                            } ?>
+                                <td class="center td_banco">
+                                    <?php echo $registro['banco'];?>
+                                </td>
+                                <td class="center td_autorizacion">
+                                    <?php echo $registro['autorizacion'];?>
+                                </td>
+                                <td class="center td_tarjeta">
+                                    <?php echo $registro['tarjeta'];?>
+                                </td>
+                                <td class="center td_pdv">
+                                    <?php echo $registro['pdv'];?>
+                                </td>
+                                <td class="center td_importe">
+                                    <?php echo substr($registro['importe'], 0, strlen($registro['importe']) - 2);?>
+                                </td>
+                                <td class="center td_liquido">
+                                    <?php if (isset($registro['estliq'])){
+                                        echo '<i class="far fa-laugh-beam"></i>';    
+                                    } else {
+                                        echo '<i class="far fa-frown"></i>';
+                                    }
+                                    ?>
+                                    <button class="button" title="Expandir info" name="detalle" value="<?php echo $registro['estliq']; ?>" disable="<?php echo isset($registro['estliq'])? "" : "disabled" ?>">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="<?php echo constant('URL'); ?>js/adquirencia_check.js"></script>
+</body>
+</html>

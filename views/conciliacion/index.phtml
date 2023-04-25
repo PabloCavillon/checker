@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/llegada_de_archivos.css">
+    <title>CHECKER PPI - CONCILIACION</title>    
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" min="<?php echo $this->fechas['min']; ?>" max="<?php echo $this->fechas['max']; ?>" value="<?php echo $this->fecha; ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <div class="scroll">
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">BANCO</th>
+                            <th colspan="3">ZIVA028</th>
+                            <th colspan="2" rowspan="2">TOTALES</th>
+                            <th colspan="4">ZIVA025A - VSS</th>
+                        </tr>
+                        <tr>
+                            <th>NO OnUs ML</th>
+                            <th>NO OnUs USD</th>
+                            <th>RECHAZOS</th>
+                            <th>FINANCIEROS</th>
+                            <th>ATM</th>
+                            <th>MERCHANDISE</th>
+                            <th>CCO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            foreach($this->conciliacion as $c){ 
+                        ?>
+                            <tr>
+                                <td class="center grey">
+                                    <?php echo $c['banco']; ?>
+                                </td>
+                                <!--td class="center">
+                                    <?php echo $c['movimientos_onus_ml']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $c['movimientos_onus_usd'];?>
+                                </td-->
+                                <td class="center">
+                                    <?php echo $c['movimientos_noonus_ml']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $c['movimientos_noonus_usd']; ?>
+                                </td>
+                                 <td class="center <?php echo ($c['rechazos'] != 0) ? 'red' : '';  ?>">
+                                    <?php echo $c['rechazos']; ?>
+                                </td>
+                                <?php $igualdad = $c['total_028'] == $c['total_025A'] ?> 
+                                <td class="center <?php echo $igualdad ? 'green' : 'yellow'; ?>">
+                                    <?php echo $c['total_028'];?>
+                                </td>
+                                <td class="center <?php echo $igualdad ? 'green' : 'yellow'; ?>">
+                                    <?php echo $c['total_025A'];?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $c['movimientos_financieros']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $c['movimientos_atm'];?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $c['movimientos_merchandise']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $c['movimientos_contracargo'];?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/conciliacion.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public\css\bancos.css">
+    <title>CHECKER PPI - Bancos</title>
+</head>
+<body>
+    <?php require 'views/header.phtml';?>
+    <div id="main">
+        <div id="contenido">
+            <div class="scroll">     
+                <table id="table" frame="void" rules="rows">
+                    <thead class="center">
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>PAIS</th>
+                        <th>EMISION</th>
+                        <th>ADQUIRENCIA</th>
+                        <th>INMEDIATA</th>
+                        <th>INFO</th>
+                    </thead> 
+                    <tbody id="tbody">
+                        <?php foreach($this->bancos as $banco){ ?>
+                            <tr>
+                                <td class="center">
+                                    <?php echo $banco['id']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $banco['nombre']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php echo $banco['pais']; ?>
+                                </td>
+                                <td class="center">
+                                    <?php
+                                        if($banco['emision'] == 1){
+                                            echo "<i class='fas fa-check '></i>";
+                                        } else {
+                                            echo "-";
+                                        }         
+                                    ?>
+                                </td>
+                                <td class="center">
+                                   <?php
+                                        if($banco['adquirencia'] == 1){
+                                            echo "<i class='fas fa-check '></i>";
+                                        } else {
+                                            echo "-";
+                                        } 
+                                    ?>
+                                </td>
+                                <td class="center">
+                                    <?php 
+                                        if($banco['inmediata'] == 1){
+                                            echo "<i class='fas fa-check '></i>";
+                                        } else {
+                                            echo "-";
+                                        }
+                                    ?>
+                                </td>
+                                <td class="center">
+                                    <button class="button" name="info" value="<?php echo $banco['id']; ?>"><i class="fas fa-info-circle"></i></button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/bancos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html>

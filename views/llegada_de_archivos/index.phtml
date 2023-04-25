@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/llegada_de_archivos.css">
+    <title>CHECKER PPI - Llegada de Archivos</title>    
+</head>
+<body>
+    <?php require 'views/header.phtml';?> 
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <div class="scroll">
+                <table id="table" frame="void" rules="rows">
+                    <thead>
+                        <tr>
+                            <th class="td_banco">BANCO</th>
+                            <th class="td_archivo">ARCHIVO</th>
+                            <th class="td_hora">ESPERADO A LAS</th>
+                            <th class="td_llegada">¿LLEGÓ?</th>
+                            <th class="td_llegada">REPORTAR A</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->archivos as $archivo){
+                            if ($archivo['llegada'] == 1){
+                                echo '<tr>';
+                            } else {
+                                echo '<tr class="pink">';
+                            } ?>
+                                <td class="center td_banco">
+                                    <?php echo $archivo['banco'];?>
+                                </td>
+                                <td class="center td_archivo">
+                                    <?php echo $archivo['archivo'];?>
+                                </td>
+                                <td class="center td_hora">
+                                    <?php echo $archivo['hora'];?>
+                                </td>
+                                <td class="center td_llegada">
+                                    <?php if ($archivo['llegada'] == 1){
+                                        echo '<i class="fas fa-grin-alt"></i>';    
+                                    } else {
+                                        echo '<i class="fas fa-sad-tear"></i>';
+                                    }
+                                    ?>
+                                </td>
+                                <td class="center">
+                                    <?php if ($archivo['llegada'] != 1){
+                                        echo $archivo['reportar_a'];    
+                                    } else {
+                                        echo '-';
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/llegada_de_archivos.js"></script>
+</body>
+</html>

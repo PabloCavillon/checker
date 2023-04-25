@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/liquidaciones.css">
+    <title>CHECKER PPI - Liquidaciones</title>
+</head>
+<body>
+    <?php require 'views/header.phtml';?>
+    <div id="main">
+        <form id="formulario"> 
+            <div id="botonera">
+                <div id="filtros">
+                    <select name="fecha" id="fecha" class="button">
+                        <?php foreach($this->fechas as $fecha){
+                                $aux = explode('-', $fecha['fecha']);
+                                $correccion = "$aux[2]-$aux[1]-$aux[0]"; 
+                                $sin_guiones = $aux[0].$aux[1].$aux[2];
+                                if ($sin_guiones == $this->fecha_show) {
+                        ?>
+                                    <option value="<?php echo $fecha['fecha'] ?>" selected><?php echo $correccion . "  (" . $fecha['cantidad'] . ")"; ?></option>
+                        <?php   } else { ?>
+                                    <option value="<?php echo $fecha['fecha'] ?>"><?php echo $correccion . "  (" . $fecha['cantidad'] . ")"; ?></option>
+                        <?php   }} ?>
+                    </select>
+                    <button class="button" id="ver_mios" value="<?php echo $_SESSION['username'];?>">VER MIOS  <i class="fas fa-user-tag"></i></button>
+                </div>
+                <div id="estados">
+                    <button value="ok" id="ok" class="button">OK  <i class="fas fa-thumbs-up"></i></button>
+                    <button value="error" id="error" class="button">ERROR  <i class="fas fa-thumbs-down"></i></button>
+                    <button value="mio" id="mio" class="button">MIO!  <i class="fas fa-child"></i></button>
+                </div>
+            </div>
+            <div id="contenido">
+                <div class="scroll">     
+                    <table id="table" frame="void" rules="rows">
+                        <thead class="center">
+                            <th>-</th>
+                            <th>TAREA</th>
+                            <th>CARTERA</th>
+                            <th>ASIGNADO A</th>
+                            <th>FECHA</th>
+                            <th>COMENTARIO</th>
+                        </thead> 
+                        <tbody id="tbody">
+                            <?php foreach($this->liquidaciones as $liquidacion){ ?>
+                                <tr id="tr_<?php echo $liquidacion->id; ?>"  <?php echo ($liquidacion->apodo == $_SESSION['apodo']) ? "class=\"grey\"" : ""?>">
+                                    <td class="center">
+                                        <input name="checkbox" type="checkbox" title="<?php echo $liquidacion->id; ?>" id="<?php echo $liquidacion->id; ?>">
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $liquidacion->banco; ?>  -  <?php echo $liquidacion->tarea; ?>
+                                        <!-- <?php if($liquidacion->tarea == 'LIQUI'){ ?>
+                                            <button class="button mail" id="mail" name="mail" title="Enviar mail al banco" value="">
+                                            <i class="fas fa-paper-plane"></i>
+                                        <?php }?> -->
+                                    </td>
+                                    <td class="center">
+                                        <?php echo $liquidacion->cartera ." - ". $liquidacion->tipo_cartera?>
+                                    </td>
+                                    <td class="center" title="<?php echo $liquidacion->usuario ." - ". $liquidacion->interno; ?>">
+                                        <?php echo $liquidacion->apodo; ?>
+                                    </td>
+                                    <td class="center">
+                                        <?php
+                                            $aux = explode('-', $liquidacion->fecha);
+                                            echo "$aux[2]-$aux[1]-$aux[0]";
+                                        ?>
+                                    </td>
+                                    <td class="center">
+                                        <button name="comentario" class="button comentario" title="Agregar comentario a la tarea" id="btn_<?php echo $liquidacion->id; ?>" value="<?php echo $liquidacion->comentario?>">
+                                        <i class="far fa-comments"></i></button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/liquidaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>   
+</html> 

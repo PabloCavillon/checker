@@ -1,0 +1,53 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'botonera.css';
+
+#main #botonera #filtros{
+    padding: 6px;
+}
+
+#main #botonera #filtros select{
+    background: #30C9C1;
+    color: #000;
+    font-family: 'Days One', sans-serif;
+    border-radius: 4px;
+    border: 2px solid #000;
+    padding: 2px;
+}
+
+#main #botonera #filtros select:hover{
+    background: #000;
+    color: #30C9C1;
+}
+
+#main #contenido{
+    font-family: 'Days One', sans-serif;
+    color: #FFF;
+    width: 100%;
+}
+
+#main #contenido .graficos{
+    background-color: rgba(0, 0, 0, 0.85);
+    width: 100%;
+    border-radius: 20px;
+    margin: 5px 0;
+    border: 2px solid rgb(255,255,255);
+    padding: 10px;
+}
+
+h1, h2, h3{
+    text-align: center;
+}
+
+.grafico_izquierdo,
+.grafico_derecho,
+.grafico_principal{
+    width: 30%;
+    display: inline-block;
+    margin:13px;
+    text-align: center;
+    background-color: rgba(255,255,255, 0.80);
+    color: #000;
+    border-radius: 10px;
+    border: 2px solid #fff;
+}

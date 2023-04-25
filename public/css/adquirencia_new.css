@@ -1,0 +1,120 @@
+@import 'default.css';
+@import 'menu.css';
+@import 'botonera.css';
+@import 'tabla.css';
+
+#main #botonera #filtros #datepicker{
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    color: #000;
+    background: rgb(48, 201, 193);
+    font-family: 'Days One', sans-serif;
+    font-size: 13px;
+}
+
+#main #contenido ul{
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-right:60px; 
+    margin-bottom: 15px;
+    list-style: none;
+}
+
+#main #contenido ul li .button-menu{
+    color: #000;
+    text-decoration: none;
+    font-family: 'Days One', sans-serif;
+    margin-left:55px; 
+    margin-bottom: -40px;
+    position: relative;
+    z-index: 10;
+}
+  
+#main #contenido ul li .button-menu .icono{
+    background-color:#000;
+    color:rgba(185, 185, 185, 0.9);
+    float: left;
+    z-index: 1000;
+    width: 55px;
+    padding: 6px;
+    font-size: 15px;
+    text-align: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 2px solid #000;
+    position: absolute;
+    z-index: 1000;
+}
+
+#main #contenido ul li .button-menu .icono.active{
+    color:#000;
+    background-color:rgba(185, 185, 185, 0.9);
+      z-index: 1000;
+      width: 55px;
+      padding: 6px;
+      font-size: 15px;
+      text-align: center;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border: 2px solid #000;
+      border-bottom: 2px solid rgba(185, 185, 185, 0.9);
+      position: absolute;
+      z-index: 1000;
+}
+
+#main #contenido ul li .button-menu .icono:hover{
+    color:rgba(185, 185, 185, 0.9);
+    background-color: #000;
+    cursor: pointer;
+}
+
+#main #contenido ul li .button-menu .icono:hover{
+    background-color:rgba(185, 185, 185, 0.9);
+    color: #000;
+    cursor: pointer;
+}
+
+
+#main #contenido #charts{
+    text-align: center;
+    background-color: rgba(185, 185, 185, 0.9);
+    border-radius: 10px;
+    margin: 3px 0;
+    padding: 0 5px;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 5px #000;
+    font-family: 'Days One', sans-serif;
+    color: black;
+    padding: 5px;
+}
+
+#main #contenido #charts #banco{
+    max-width: 30%;
+    height: 30vh;
+    background-color: rgba(0, 0, 0, 0.80);
+    border-radius: 10px;
+    border: 3px solid black;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+}
+
+#banco{
+    position: relative;
+}
+
+.btn-detalle{
+    border-radius: 5px;
+    border: 2px solid #000;
+    color: #000;
+    background: rgb(48, 201, 193);
+    font-family: 'Days One', sans-serif;
+    font-size: 13px;
+    padding: 5px;
+    position: absolute;
+    left: 10px;
+    bottom: 23px;
+    margin-bottom: 0;
+}

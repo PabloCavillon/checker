@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/adquirencia.css">
+    <title>CHECKER PPI - Adquirencia</title>
+</head>
+<body>
+    <?php require 'views/header.phtml'; ?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <div>
+                <div id="charts">
+                    <h1>Adquirencia</h1>
+                    <div id="banco">
+                        <h3>701</h3>
+                        <canvas id="chart701" style="display: inline-block; height: 100%; width:100%;"></canvas>
+                        <button class="btn-detalle" id="detalle701">Detalle</button>
+                    </div>
+                    <div id="banco">
+                        <h3>703</h3>
+                        <canvas id="chart703" style="display: inline-block; height: 100%; width:100%;"></canvas>
+                        <button class="btn-detalle" id="detalle703">Detalle</button>
+                    </div>
+                    <div id="banco">
+                        <h3>720</h3>
+                        <canvas id="chart720" style="display: inline-block; height: 100%; width:100%;"></canvas>
+                        <button class="btn-detalle" id="detalle720">Detalle</button>
+                    </div>
+                    <div id="banco">
+                        <h3>MELI</h3>
+                        <canvas id="chartMELI" style="display: inline-block; height: 100%; width:100%;"></canvas>
+                        <button class="btn-detalle" id="detalleMELI">Detalle</button>
+                    </div>
+                    <div id="banco">
+                        <h3>734 (Solo nocturna)</h3>
+                        <canvas id="chart734" style="display: inline-block; height: 100%; width:100%;"></canvas>
+                            <button class="btn-detalle" id="detalle734">Detalle</button>
+                    </div>
+                    <div id="banco">
+                        <h3>790 (Solo nocturna)</h3>
+                        <canvas id="chart790" style="display: inline-block; height: 100%; width:100%;"></canvas>
+                            <button class="btn-detalle" id="detalle790">Detalle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+        const adquirencia = <?php echo json_encode($this->adquirencia); ?>;
+    </script>
+    <script src="<?php echo constant('URL'); ?>js/adquirencia.js "></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public\css\estadisticas.css">
+    <title>CHECKER PPI - Estadisticas</title>
+</head>
+<body>
+    <?php require 'views/header.phtml';?>
+    
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <select id="month" class="picker">
+                    <?php foreach ($this->meses as $mes => $nombre) {
+                        if ($mes == $this->mes){
+                            echo "<option value='$mes' selected>$nombre</option>";
+                        } else {
+                            echo "<option value='$mes'>$nombre</option>";
+                        }
+                    } ?>
+                </select>
+                <select id="year" class="picker">
+                    <!-- Se toma 2019 porque a partir de ese año se empezo a usar checker-->
+                    <?php for ($i = date('Y'); $i >= 2019; $i--) {
+                        if ($i == $this->year){
+                            echo "<option value='$i' selected>$i</option>";
+                        } else {
+                            echo "<option value='$i'>$i</option>";
+                        }
+                    } ?>
+                </select>
+            </div>
+        </div>
+        <div id="contenido">
+            <div id="graficos" class="graficos">
+                <h1>TAREAS DIARIAS</h1>
+                <div class="grafico_derecho">
+                    <h3>OK</h3>
+                    <div id="tareas_ok" style="height: 180px;"></div>   
+                </div>    
+                <div class="grafico_principal">
+                    <h2>TOTAL</h2>
+                    <div id="tareas" style="height: 250px;"></div>
+                </div>
+                <div class="grafico_izquierdo">
+                    <h3>ERROR</h3>
+                    <div id="tareas_error" style="height: 180px;"></div>
+                </div>
+            </div>
+
+            <div class="graficos">
+                <h1>TAREAS DE LIQUIDACIÓN</h1>
+                <div class="grafico_derecho">
+                    <h3>OK</h3>
+                    <div id="liquis_ok" style="height: 180px;"></div>   
+                </div>
+                <div class="grafico_principal">
+                    <h2>TOTAL</h2>
+                    <div id="liquis" style="height: 250px;"></div>
+                </div>
+                <div class="grafico_izquierdo">
+                    <h3>ERROR</h3>
+                    <div id="liquis_error" style="height: 180px;"></div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        var tareas = <?php echo json_encode($this->tareas); ?>;
+        var tareas_error = <?php echo json_encode($this->tareas_error); ?>;
+        var tareas_ok = <?php echo json_encode($this->tareas_ok); ?>;
+        var liquis = <?php echo json_encode($this->liquis); ?>;
+        var liquis_error = <?php echo json_encode($this->liquis_error); ?>;
+        var liquis_ok = <?php echo json_encode($this->liquis_ok); ?>;
+    </script>
+    <script src="<?php echo constant('URL'); ?>js\estadisticas.js"></script>
+</body>
+</html>

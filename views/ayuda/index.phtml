@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/ayuda.css">
+</head>
+<body>
+    <?php require 'views/header.phtml';?>
+    <div id="main">
+        <div id="contenido">
+            <div id="titulo">
+                <h2><?php echo $this->titulo; ?></h2>
+            </div>
+            <section id="teoria">
+                <h2>¿Qué hace?</h2>
+            </section>
+            <section id="control">
+                <h2>¿Cómo se controla?</h2>
+            </section>
+            <section id="contacto">
+                <h2>Contactos de interes</h2>
+            </section>
+            <section id="incidentes">
+                <h2>Historial de incidentes</h2>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

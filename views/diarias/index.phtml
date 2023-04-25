@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/diarias.css">
+    <title>CHECKER PPI - Diarias</title>
+</head>
+<body>
+    <?php require 'views/header.phtml';?>
+    <div id="main">
+        <form id="formulario">
+            <div id="botonera">
+                <div id="filtros">
+                    <select name="fecha" id="fecha" class="button">
+                        <?php
+                            foreach($this->fechas as $fecha){
+                                $aux = explode('-', $fecha['fecha']);
+                                $correccion = "$aux[2]-$aux[1]-$aux[0]"; 
+                                $sin_guiones = $aux[0].$aux[1].$aux[2];
+                                if ($sin_guiones == $this->fecha_show){
+                        ?>
+                                    <option value="<?php echo $fecha['fecha'] ?>" selected><?php echo $correccion . "  (" . $fecha['cantidad'] . ")"; ?></option>
+                        <?php } else { ?>
+                                    <option value="<?php echo $fecha['fecha'] ?>"><?php echo $correccion . " (" . $fecha['cantidad'] . ")"; ?></option>
+                        <?php }} ?>
+                    </select>
+                    <button class="button" id="ver_mios" value="<?php echo $_SESSION['username'];?>">VER MIOS  <i class="fas fa-user-tag"></i></button>
+                </div>
+                <div id="estados">
+                    <button name="ok" id="ok" class="button" type="submit">OK  <i class="fas fa-thumbs-up" aria-hidden="true"></i></button>
+                    <button name="error" id="error" class="button" type="submit">ERROR  <i class="fas fa-thumbs-down"></i></button>
+                    <button name="mio" id="mio" class="button" type="submit">MIO!  <i class="fas fa-child"></i></button>
+                </div>
+            </div>
+            <div id="contenido">
+                <div class="scroll">     
+                    <table id="table" frame="void" rules="rows">
+                        <thead class="center">
+                            <th class="td_guion">-</th>
+                            <th class="td_tarea">TAREA</th>
+                            <th class="td_hora">HORA</th>
+                            <th class="td_fecha">FECHA</th>
+                            <th class="td_asignado">ASIGNADO A</th> 
+                            <th class="td_comentario">ACCIONES</th>
+                        </thead> 
+                        <tbody id="tbody">
+                            <?php foreach($this->tareas as $tarea){ ?>
+                                <tr id="tr_<?php echo $tarea->id; ?>" <?php echo ($tarea->apodo == $_SESSION['apodo']) ? "class=\"grey\"" : ""?>>
+                                    <td class="center td_guion">
+                                        <input name="checkbox" type="checkbox" title="<?php echo $tarea->id; ?>" id="<?php echo $tarea->id; ?>">
+                                    </td>
+                                    <td class="td_tarea">
+                                        <?php echo $tarea->tarea; ?> 
+                                    </td>
+                                    <td class="center td_hora"> 
+                                        <?php 
+                                            $aux = explode(':', $tarea->hora_tarea);
+                                            echo $aux[0] .':'. $aux[1] ;
+                                        ?>
+                                    </td>
+                                    <td class="center td_fecha">
+                                        <?php
+                                            $aux = explode('-', $tarea->fecha_creado);
+                                            echo "$aux[2]-$aux[1]-$aux[0]";
+                                        ?>
+                                    </td>
+                                    <td class="center td_asignado" title="<?php echo $tarea->nombre_usuario ." - ". $tarea->interno; ?>">
+                                        <?php echo $tarea->apodo; ?>
+                                    </td>
+                                    <td class="center td_comentario">
+                                        <!--button class="button" id="ayuda" name="ayuda" value="<?php echo $tarea->tarea; ?>">
+                                            <i class="fas fa-question"></i>
+                                        </button-->
+                                        <button name="comentario" class="button comentario" id="btn_<?php echo $tarea->id; ?>" title="Agregar comentario a la tarea" value="<?php echo $tarea->comentario?>">
+                                            <i  class='far fa-comments'></i>
+                                        </button>
+                                        <?php if(isset($tarea->vista_en_checker)){ ?>
+                                            <button class="button" id="automatica" name="automatica" title="Ir a la vista del control" value="<?php echo $tarea->vista_en_checker ?>">
+                                                <i class="fas fa-robot"></i>
+                                            </button>
+                                        <?php }?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form> 
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/diarias.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html> 

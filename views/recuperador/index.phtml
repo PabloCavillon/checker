@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo constant('URL');?>public/css/recuperador.css">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <title>CHECKER PPI - Recuperador</title>
+</head>
+<body>
+    <?php require('views/header.phtml'); ?> 
+    <div id="main">
+        <form id="formulario">
+            <div id="botonera">
+                <div id="filtros">
+                    <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+                    <!--button name="excel" id="excel" class="button" type="submit">
+                        GENERAR EXCEL <i class="fas fa-file-download"></i>
+                    </button-->
+                </div>
+                <div id="estados">
+                    <button name="ok" id="ok" class="button" type="submit">RECUPERAR OK  <i class="fas fa-thumbs-up" aria-hidden="true"></i></button>
+                    <button name="error" id="error" class="button" type="submit">RECUPERAR ERROR  <i class="fas fa-thumbs-down"></i></button>
+                </div>
+            </div>
+            <div id="contenido">
+                <div class="scroll">     
+                    <table id="table" frame="void" rules="rows">
+                        <thead class="center">
+                            <th> </th>
+                            <th>TAREA</th>
+                            <th>ESTADO</th>
+                            <th class="td_minimo">CREADO</th>
+                            <th class="td_minimo">CERRADO</th>
+                            <th >ESTADO RECUPERADO</th>
+                            <th >FECHA RECUPERADO</th>
+                            <th >ACCIONES</th>
+                        </thead> 
+                        <tbody id="tbody">
+                            <?php foreach($this->tareas as $tarea){ ?>
+                                <tr id="tr_<?php echo $tarea->id; ?>">
+                                    <td class="center td_guion">
+                                        <input name="checkbox" type="checkbox" title="<?php echo $tarea->id; ?>" id="<?php echo $tarea->id; ?>" <?php echo ($tarea->estado == 'Pendiente')? 'disabled' : '' ?>>
+                                    </td>
+                                    <td class="td_tarea">
+                                        <?php echo $tarea->tarea; ?> 
+                                    </td>
+                                    <td class="center td_estado"> 
+                                        <?php echo $tarea->estado; ?>
+                                    </td>
+                                    <td class="center td_fecha">
+                                        <?php
+                                            $f = explode('-', $tarea->fecha_creado);
+                                            $h = explode(':', $tarea->hora_tarea);
+                                            echo "$f[2]-$f[1]-$f[0]<br/>$h[0]:$h[1]";
+                                        ?>
+                                    </td>
+                                    <td class="center td_fecha">
+                                        <?php
+                                            if(isset($tarea->fecha_cerrado)){
+                                                $f = explode('-', $tarea->fecha_cerrado);
+                                                $h = explode(':', $tarea->hora_cerrado);
+                                                echo "$f[2]-$f[1]-$f[0]<br/>$h[0]:$h[1]";
+                                            } else {
+                                                echo "-";
+                                            }
+                                        ?>
+                                    </td>
+                                    <td class="center td_estado">
+                                        <?php 
+                                            echo $tarea->estado_recuperado;
+                                        ?>
+                                    </td>
+                                    <td class="center td_fecha">
+                                        <?php 
+                                            if(isset($tarea->fecha_recuperado)){
+                                                $f = explode('-', $tarea->fecha_recuperado);
+                                                echo "$f[2]-$f[1]-$f[0]";
+                                            } else {
+                                                echo "-";
+                                            }
+                                        ?>
+                                    </td>
+                                    <td class="center td_accion">
+                                        <button <?php echo $tarea->comentario != "" ? 'class="button green"' : 'class="button"' ?> name="detalle" title="Ver detalle de la tarea" value="<?php echo $tarea->id; ?>">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button name="comentario" class="button comentario" id="btn_<?php echo $tarea->id; ?>" title="Agregar comentario a la tarea" value="<?php echo $tarea->causa_recuperado ?>">
+                                            <i  class='far fa-comments'></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form> 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="<?php echo constant('URL')?>js/recuperador.js"></script>
+</body>
+</html>

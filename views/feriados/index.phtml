@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public\css\feriados.css">
+    <title>CHECKER PPI - Feriados</title>
+</head> 
+<body>
+    <?php require 'views/header.phtml' ?>
+    <div id="main">
+        <form>
+            <div id="botonera">
+                <div id="filtros">
+                    <select id="year" class="picker button">
+                        <?php for ($i = date('Y'); $i >= 2020; $i--) {
+                            if ($i == $this->year){
+                                echo "<option value='$i' selected>$i</option>";
+                            } else {
+                                echo "<option value='$i'>$i</option>";
+                            }
+                        }?>
+                    </select>
+                    <?php if($_SESSION['tipo'] == 3){?>
+                        <input type="text" placeholder="Conmemoración" id="conmemoracion">
+                        <input type="date" name="fecha" id="fecha">
+                        <button id="new_feriado" class="button" type="submit">AÑADIR FERIADO <i class="fas fa-calendar-plus"></i></button>
+                    <?php } ?>
+                </div>
+                <div id="estados">
+                    <button id="asignarme" class="button" type="submit">ASIGNARME  <i class="fas fa-user-plus"></i></button>
+                    <button id="desasignarme" class="button" type="submit">DESASIGNARME  <i class="fas fa-user-minus"></i></button>
+                </div>
+            </div>
+            <div id="contenido">
+                <div class="scroll">
+                    <table id="table" frame="void" rules="rows">
+                        <thead>
+                            <th>-</th>
+                            <th>FERIADO</th>
+                            <th>DÍA</th>
+                            <th>CONTROLLER</th>
+                            <?php if($_SESSION['tipo'] == 3){?>
+                                <th>ACCIONES</th>
+                            <?php } ?>
+                        </thead>
+                        <tbody>
+                            <?php foreach($this->feriados as $feriado){ ?>
+                                <tr id="<?php echo $feriado['id_feriado']; ?>" class="<?php echo (strpos($feriado['apodo'], $_SESSION['apodo']) !== false)? "grey" : ""; ?>">
+                                    <td class="center">
+                                        <input name="checkbox" type="checkbox" title="<?php echo $feriado['id_feriado']; ?>" id="<?php echo $feriado['id_feriado']; ?>">
+                                    </td>
+                                    <td class="center"><?php echo $feriado['descripcion'] ?></td>
+                                    <td class="center">
+                                        <?php 
+                                            $dia = ($feriado['dia'] < 10)? "0" .$feriado['dia'] : $feriado['dia'];
+                                            $mes = ($feriado['mes'] < 10)? "0" .$feriado['mes'] : $feriado['mes']; 
+                                            echo $dia . "-" . $mes . "-" . $feriado['year'];
+                                        ?>
+                                    </td>
+                                    <td class="center"><?php echo $feriado['apodo'] ?></td>
+                                    <?php if($_SESSION['tipo'] == 3){?>
+                                        <td class="center">
+                                            <button class="button" title="Eliminar" name="delete" value="<?php echo $feriado['id_feriado'] ?>">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    <?php } ?>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="<?php echo constant('URL')?>js\feriados.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e96633bd75.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/zcgea010.css">
+    <title>CHECKER PPI - Rechazos ZCGA010</title>
+</head>
+<body>
+    <?php require 'views/header.phtml'?>
+    <div id="main">
+        <div id="botonera">
+            <div id="filtros">
+                <input id="datepicker" type="date" value="<?php echo $this->fecha ?>">
+            </div>
+        </div>
+        <div id="contenido">
+            <table id="table" frame="void" rules="rows">
+                <thead> 
+                    <th class="center">BANCO</th>
+                    <th class="center">ARCHIVO</th>
+                    <th class="center">TIPO DE RECHAZO</th>
+                    <th class="center">CANTIDAD</th>
+                </thead> 
+                <tbody> 
+                    <?php
+                        foreach($this->rechazos as $rechazo){
+                    ?>
+                        <tr> 
+                            <td class='center'> <?php echo $rechazo['banco']; ?></td>
+                            <td class='center'> <?php echo $rechazo['zcga']; ?></td>
+                            <td class='center'> <?php echo $rechazo['descripcion']; ?></td>
+                            <td class='center'> <?php echo $rechazo['cantidad']; ?></td>
+                        </tr> 
+                    <?php } ?>           
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="<?php echo constant('URL'); ?>js/rechazos_zcga.js"></script>
+</body>
+</html>
